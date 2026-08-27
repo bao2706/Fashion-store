@@ -9,8 +9,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
-public class Category {
-    private String cateName;
-    private String cateID;
+public class Account {
+    String username;
+    String password;
+    int id;
+    int issell;
+    int isAdmin;
 
 }

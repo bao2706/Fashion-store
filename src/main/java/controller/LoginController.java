@@ -1,7 +1,7 @@
 package controller;
 
 import DAO.DAO;
-import entity.Product;
+import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,34 +10,28 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/detail")
-public class viewProductController extends HttpServlet {
+@WebServlet("/login")
+public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        // get data
-   String id = request.getParameter("id");
-
-
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         DAO dao = new DAO();
-        Product product = new DAO().getProductsByID(id);
-        request.setAttribute("p", product);
+        Account user = dao.login(username,password);
+        if (user != null) {
+            response.sendRedirect("home");
+        }else {
+            request.setAttribute("error","loi roi kia");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
 
-        request.getRequestDispatcher("/mainPageProduct.jsp").forward(request, response);
     }
-
-
 }

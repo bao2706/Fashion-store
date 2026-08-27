@@ -1,30 +1,34 @@
-package context;
+package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class DBConnect {
-    public Connection getConnection() throws Exception {
-        String url = "jdbc:sqlserver://" + serverName + "\\" + instance + ":" + portNumber + ";databaseName=" + databaseName;
-        if (instance == null || instance.trim().isEmpty())
-            url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + databaseName;
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        return DriverManager.getConnection(url, userId, password);
-    }
+public class DBConnection {
 
-    private final String serverName = "localhost";
-    private final String portNumber = "3306";
-    private final String databaseName = "shortshop";
-    private final String instance = "";
-    private final String userId = "root";
-    private final String password = "root";
+    private static final String URL = "jdbc:mysql://localhost:3306/shortshop";
+    private static final String USER = "root";
+    private static final String PASSWORD = "root";
 
-    public static void main(String[] args) {
+    // Khối static sẽ tự động chạy DUY NHẤT 1 lần khi class này được tải vào bộ nhớ
+    static {
         try {
-            System.out.println(new DBConnect().getConnection());
-        } catch (Exception e) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("LỖI: KHÔNG TÌM THẤY DRIVER MYSQL!");
             e.printStackTrace();
         }
     }
 
+    public static Connection getConnection() throws SQLException {
+        // Hàm này giờ đây rất sạch sẽ, chỉ làm đúng nhiệm vụ mở kết nối
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    public static void main(String[] args) {
+     try {
+         System.out.println(new DBConnection().getConnection());
+
+     }catch (Exception e){}
+    }
 }
