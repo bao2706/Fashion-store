@@ -1,98 +1,135 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="1/assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="1/css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder"> Welcome to Shop</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <!-- Section-->
-                <section class="py-5">
-                    <div class="container px-4 px-lg-5 mt-5">
-                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-                            <c:forEach items="${listProduct}" var="o">
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="${o.image}" alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">${o.name}</h5>
-                                                <!-- Product price (bạn nhớ thay giá tĩnh bằng ${o.price} nếu entity có thuộc tính giá nhé) -->
-                                                ${o.price} $
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach> <!-- Kết thúc vòng lặp ở đây -->
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <meta name="description" content="">
+            <meta name="author" content="">
+
+            <title>Shop Homepage</title>
+
+            <!-- Favicon -->
+            <link rel="icon" type="image/x-icon" href="1/assets/favicon.ico">
+
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+            <!-- Bootstrap Icons -->
+            <link rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+            <!-- Custom CSS -->
+            <link href="1/css/styles.css" rel="stylesheet">
+        </head>
+
+        <body>
+            <jsp:include page="header.jsp"></jsp:include>
+
+            <!-- ==================== Navigation ==================== -->
 
 
+
+            <!-- ==================== Header ==================== -->
+
+
+
+            <!-- ==================== Category ==================== -->
+            <div class="container mt-4">
+
+                <div class="row g-3">
+
+                    <c:forEach items="${listCategory}" var="o">
+                        <div class="col-6 col-md-3">
+                            <a href="category?cateID=${o.cateID}"
+                                class="btn btn-outline-dark w-100 py-3 ${tag == o.cateID ? " active":""}">
+                                ${o.cateName}
+                            </a>
                         </div>
+                    </c:forEach>
+                </div>
+
+            </div>
+
+            <!-- ==================== Product Section ==================== -->
+            <section class="py-5">
+
+                <div class="container px-4 px-lg-5 mt-5">
+
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        <c:if test="${empty listProduct}">
+                            <h3 class="text-center w-100 mt-5">Không tìm thấy sản phẩm nào!</h3>
+                        </c:if>
+
+                        <!-- Product Loop -->
+                        <c:forEach items="${listProduct}" var="o">
+
+                            <div class="col mb-5">
+
+                                <div class="card h-100">
+
+                                    <!-- Product Image -->
+                                    <img class="card-img-top"
+                                        src="${pageContext.request.contextPath}/image/${o.image != null ? o.image : 'https://via.placeholder.com/450x300?text=No+Image'}"
+                                        alt="${pageContext.request.contextPath}/image/${o.image != null ? o.image : 'https://via.placeholder.com/450x300?text=No+Image'}">
+
+                                    <!-- Product Details -->
+                                    <div class="card-body p-4">
+
+                                        <div class="text-center">
+
+                                            <!-- Product Name -->
+                                            <h5 class="fw-bolder">
+                                                ${o.name}
+                                            </h5>
+
+                                            <!-- Product Price --f>
+                                            <span>
+                                                ${o.price} $
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Product Actions -->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                                        <div class="text-center">
+
+                                            <a class="btn btn-outline-dark mt-auto" href="detail?id=${o.id}">
+                                                View options
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </c:forEach>
+
                     </div>
-                </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="１/js/scripts.js"></script>
-    </body>
-</html>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================== Footer ==================== -->
+            <jsp:include page="footer.jsp"></jsp:include>
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Custom JS -->
+            <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
+        </body>
+
+        </html>
