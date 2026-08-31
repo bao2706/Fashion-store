@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/asset/login.jsp").forward(request, response);
     }
 
     @Override
@@ -27,10 +28,13 @@ public class LoginController extends HttpServlet {
         DAO dao = new DAO();
         Account user = dao.login(username,password);
         if (user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setMaxInactiveInterval(20);
             response.sendRedirect("home");
         }else {
             request.setAttribute("error","loi roi kia");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/asset/login.jsp").forward(request, response);
         }
 
     }

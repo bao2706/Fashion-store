@@ -29,14 +29,14 @@ public class viewProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         // get data
-   String id = request.getParameter("id");
+        String id = request.getParameter("id");
 
 
         DAO dao = new DAO();
         Product product = new DAO().getProductsByID(id);
-        request.setAttribute("p", product);
+        request.setAttribute("product", product);
 
-        request.getRequestDispatcher("/mainPageProduct.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/asset/mainPageProduct.jsp").forward(request, response);
     }
 
 

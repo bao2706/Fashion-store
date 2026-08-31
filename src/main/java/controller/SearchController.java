@@ -37,7 +37,7 @@ public class SearchController  extends HttpServlet {
         request.setAttribute("listProduct", SearchP);
         request.setAttribute("txtSearch", txtSearch);
 
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
 
 

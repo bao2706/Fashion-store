@@ -15,6 +15,7 @@ public class DAO {
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+
     public List<Product> getAllProducts() {
         List<Product> list = new ArrayList<>();
         String query = "select * from products;";
@@ -37,6 +38,7 @@ public class DAO {
 
         return list;
     }
+
     public List<Product> getProductsByCateID(String cateID) {
         List<Product> list = new ArrayList<>();
         String query = "select * from products where CatoID =?\n";
@@ -60,13 +62,14 @@ public class DAO {
 
         return list;
     }
-    public List<Product>    SearchProductByTxtSearch(String txtSearch) {
+
+    public List<Product> SearchProductByTxtSearch(String txtSearch) {
         List<Product> list = new ArrayList<>();
         String query = "select * from products where name like ?\n";
         try {
             con = new DBConnection().getConnection();// DB connect
             ps = con.prepareStatement(query);
-            ps.setString(1, "%"+ txtSearch+"%");
+            ps.setString(1, "%" + txtSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Product(
@@ -83,15 +86,16 @@ public class DAO {
 
         return list;
     }
+
     public Product getProductsByID(String id) {
-        String query = "select * from products where id=?\n";
+        String query = "select * from products where id=? \n";
         try {
             con = new DBConnection().getConnection();// DB connect
             ps = con.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-               return new Product(
+                return new Product(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
@@ -103,6 +107,7 @@ public class DAO {
         }
         return null;
     }
+
     public List<Category> getAllCategori() {
         List<Category> listC = new ArrayList<>();
         String query = "SELECT * FROM shortshop.category;";
@@ -123,8 +128,9 @@ public class DAO {
 
         return listC;
     }
+
     public Account login(String username, String password) {
-        String query =  "SELECT * FROM `user` WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM `user` WHERE username = ? AND password = ?";
         try {
             con = new DBConnection().getConnection();// DB connect
             ps = con.prepareStatement(query);
@@ -145,13 +151,48 @@ public class DAO {
 
         return null;
     }
+    public void  signUp(String username, String password) {
+        String query ="INSERT INTO user (username, password, issell, isAdmin) VALUES (?, ?, 0, 0)";
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+
+
+    }
+
+
+
+    public Account checkAccount(String username) {
+        String query = "SELECT * FROM `user` WHERE username = ?";
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("id"),
+                        rs.getInt("issell"),
+                        rs.getInt("isAdmin")
+                );
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        Account list = dao.login("0","111111");
+        Account list = dao.login("0", "111111");
         if (list == null) {
             System.out.println("ko co user");
-        }else {
+        } else {
             System.out.println(list.toString());
         }
 //        for (Product o : list) {

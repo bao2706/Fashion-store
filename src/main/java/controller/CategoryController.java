@@ -29,7 +29,7 @@ public class CategoryController extends HttpServlet {
 
 
 
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

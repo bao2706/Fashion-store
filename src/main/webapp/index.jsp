@@ -28,7 +28,7 @@
         </head>
 
         <body>
-            <jsp:include page="header.jsp"></jsp:include>
+            <jsp:include page="/views/common/header.jsp"></jsp:include>
 
             <!-- ==================== Navigation ==================== -->
 
@@ -54,7 +54,6 @@
                 </div>
 
             </div>
-
             <!-- ==================== Product Section ==================== -->
             <section class="py-5">
 
@@ -87,7 +86,7 @@
                                                 ${o.name}
                                             </h5>
 
-                                            <!-- Product Price --f>
+                                            <!-- Product Price -->
                                             <span>
                                                 ${o.price} $
                                             </span>
@@ -123,7 +122,7 @@
 
 
             <!-- ==================== Footer ==================== -->
-            <jsp:include page="footer.jsp"></jsp:include>
+            <jsp:include page="/views/common/footer.jsp"></jsp:include>
 
             <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
