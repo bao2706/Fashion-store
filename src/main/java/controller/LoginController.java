@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            session.setMaxInactiveInterval(20);
+            session.setMaxInactiveInterval(2000);
             response.sendRedirect("home");
         }else {
             request.setAttribute("error","loi roi kia");

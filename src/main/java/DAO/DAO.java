@@ -86,6 +86,29 @@ public class DAO {
 
         return list;
     }
+    public List<Product> getProductBySellId(int sellId){
+        List<Product> list = new ArrayList<>();
+        String query = "select * from products where sellID=? ;";
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setInt(1, sellId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getString("image")
+                ));
+            }
+        } catch (Exception e) {
+        }
+
+
+        return list;
+    }
 
     public Product getProductsByID(String id) {
         String query = "select * from products where id=? \n";
@@ -189,11 +212,11 @@ public class DAO {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        Account list = dao.login("0", "111111");
+        List<Product> list = dao.getProductBySellId(1);
         if (list == null) {
             System.out.println("ko co user");
         } else {
-            System.out.println(list.toString());
+            System.out.println(list.toString()+"/n");
         }
 //        for (Product o : list) {
 //            System.out.println(o);

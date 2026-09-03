@@ -39,7 +39,7 @@
                         </li>
                         <c:if test="${sessionScope.user != null && sessionScope.user.issell == 1 }">
                             <li class="nav-item">
-                                <a class="nav-link" href="#!">
+                                <a class="nav-link" href="/first-production/manager">
                                     Manager Product
                                 </a>
                             </li>
@@ -47,7 +47,7 @@
                         <c:if test="${sessionScope.user != null && sessionScope.user.isAdmin == 1 }">
                             <li class="nav-item">
                                 <a class="nav-link" href="#!">
-                                    Manager Product
+                                    Manager Accout
                                 </a>
                             </li>
                         </c:if>
