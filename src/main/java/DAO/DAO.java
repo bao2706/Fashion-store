@@ -28,8 +28,9 @@ public class DAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getString("image")
+                        rs.getString("price"),
+                        rs.getString("image"),
+                        rs.getString("CatoID")
                 ));
             }
         } catch (Exception e) {
@@ -52,8 +53,9 @@ public class DAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getString("image")
+                        rs.getString("price"),
+                        rs.getString("image"),
+                        rs.getString("CatoID")
                 ));
             }
         } catch (Exception e) {
@@ -76,8 +78,9 @@ public class DAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getString("image")
+                        rs.getString("price"),
+                        rs.getString("image"),
+                        rs.getString("CatoID")
                 ));
             }
         } catch (Exception e) {
@@ -99,8 +102,9 @@ public class DAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getString("image")
+                        rs.getString("price"),
+                        rs.getString("image"),
+                        rs.getString("CatoID")
                 ));
             }
         } catch (Exception e) {
@@ -122,15 +126,15 @@ public class DAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getString("image")
+                        rs.getString("price"),
+                        rs.getString("image"),
+                        rs.getString("CatoID")
                 );
             }
         } catch (Exception e) {
         }
         return null;
     }
-
     public List<Category> getAllCategori() {
         List<Category> listC = new ArrayList<>();
         String query = "SELECT * FROM shortshop.category;";
@@ -187,6 +191,67 @@ public class DAO {
 
 
     }
+    public void  addProduct(String name, String  description, String price, String image, String cateId, String sellId) {
+        String query ="INSERT INTO products (name, image, description, price,CatoID,SellID) VALUES (?,?,?, ?, ?, ?)";
+
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setString(3, description);
+            ps.setString(4, price);
+            ps.setString(5, cateId);
+            ps.setString(6, sellId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+    public void  deleteProduct(String id) {
+        String query ="DELETE FROM products\n" +
+                "WHERE id = ?; \n";
+
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public void  update(String name,String image,String description,String price,String CatoID,String id) {
+        String query ="UPDATE products\n" +
+                "SET\n" +
+                "    name = ? , \n" +
+                "    image =? ,\n" +
+                "    description = ?,\n" +
+                "    price = ?,\n" +
+                "    CatoID = ?\n" +
+                "WHERE id = ?;";
+
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setString(3, description);
+            ps.setString(4, price);
+            ps.setString(5, CatoID);
+            ps.setString(6, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
 
@@ -212,12 +277,12 @@ public class DAO {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        List<Product> list = dao.getProductBySellId(1);
-        if (list == null) {
-            System.out.println("ko co user");
-        } else {
-            System.out.println(list.toString()+"/n");
-        }
+//        List<Product> list = dao.getProductBySellId(1);
+//        if (list == null) {
+//            System.out.println("ko co user");
+//        } else {
+//            System.out.println(list.toString()+"/n");
+//        }
 //        for (Product o : list) {
 //            System.out.println(o);
 //        }

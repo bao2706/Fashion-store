@@ -2,6 +2,7 @@ package controller;
 
 import DAO.DAO;
 import entity.Account;
+import entity.Category;
 import entity.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,12 +21,13 @@ public class ProductManagerController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Account user = (Account) session.getAttribute("user");
-        System.out.println(user);
         int id = user.getId();
         DAO dao = new DAO();
         List<Product> listProduct = dao.getProductBySellId(id);
+       List<Category> listCategory = dao.getAllCategori();
 
         req.setAttribute("product", listProduct);
+        req.setAttribute("categories", listCategory);
         req.getRequestDispatcher("views/asset/productManager.jsp").forward(req, resp);
     }
 }

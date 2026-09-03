@@ -1,328 +1,303 @@
 <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!DOCTYPE html>
+        <!DOCTYPE html>
 
-<html lang="vi">
+        <html lang="vi">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Quản lý sản phẩm</title>
+            <title>Quản lý sản phẩm</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+            <!-- Bootstrap -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
+            <!-- Bootstrap Icons -->
+            <link rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        </head>
 
-<body class="bg-light">
+        <body class="bg-light">
 
-    <!-- Header -->
-    <jsp:include page="/views/common/header.jsp" />
+            <!-- Header -->
+            <jsp:include page="/views/common/header.jsp" />
 
-    <div class="container py-5">
+            <div class="container py-5">
 
-        <!-- HEADER -->
-        <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
+                <!-- HEADER -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
 
-                <div class="d-flex flex-column flex-md-row
+                        <div class="d-flex flex-column flex-md-row
                             justify-content-between
                             align-items-md-center gap-3">
 
-                    <div>
-                        <h2 class="mb-1 fw-bold">
-                            Quản lý sản phẩm
-                        </h2>
+                            <div>
+                                <h2 class="mb-1 fw-bold">
+                                    Quản lý sản phẩm
+                                </h2>
 
-                        <p class="text-muted mb-0">
-                            Danh sách các món hàng đang bán
-                        </p>
+                                <p class="text-muted mb-0">
+                                    Danh sách các món hàng đang bán
+                                </p>
+                            </div>
+
+                            <!-- BUTTON THÊM SẢN PHẨM -->
+                            <button class="btn btn-primary" type="button" id="btnAddProduct" data-bs-toggle="modal"
+                                data-bs-target="#productModal">
+
+                                <i class="bi bi-plus-circle me-1"></i>
+
+                                Thêm sản phẩm
+
+                            </button>
+
+                        </div>
+
                     </div>
-
-                    <!-- BUTTON THÊM SẢN PHẨM -->
-                    <button class="btn btn-primary"
-                            type="button"
-                            id="btnAddProduct"
-                            data-bs-toggle="modal"
-                            data-bs-target="#productModal">
-
-                        <i class="bi bi-plus-circle me-1"></i>
-
-                        Thêm sản phẩm
-
-                    </button>
-
                 </div>
 
-            </div>
-        </div>
+                <!-- PRODUCT TABLE -->
+                <div class="card shadow-sm border-0">
 
-        <!-- PRODUCT TABLE -->
-        <div class="card shadow-sm border-0">
+                    <div class="card-body p-0">
 
-            <div class="card-body p-0">
+                        <div class="table-responsive">
 
-                <div class="table-responsive">
+                            <table class="table table-striped table-bordered align-middle mb-0">
 
-                    <table class="table table-striped table-bordered align-middle mb-0">
+                                <thead class="table-light">
 
-                        <thead class="table-light">
-
-                            <tr>
-                                <th>Ảnh</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Giá</th>
-                                <th class="text-center">Thao tác</th>
-                            </tr>
-
-                        </thead>
-
-
-
-                        <tbody id="productTableBody">
-
-                            <c:if test="${not empty product}">
-
-                                <c:forEach var="o" items="${product}">
-
-                                    <tr data-id="${o.id}"
-                                        data-name="${o.name}"
-                                        data-price="${o.price}"
-                                        data-image="${pageContext.request.contextPath}/image/${o.image}"
-                                        data-description="${o.description}">
-
-                                        <td>
-
-                                            <img class="img-fluid rounded"
-                                                 src="${pageContext.request.contextPath}/image/${o.image}"
-                                                 alt="${o.name}"
-                                                 style="max-width:80px;height:80px;object-fit:cover;">
-
-                                        </td>
-
-                                        <td>${o.name}</td>
-                                        <td class="fw-bold text-danger">${o.price}đ</td>                                    
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center gap-2">
-                                                <button type="button" class="btn btn-warning btn-sm btn-edit" title="Sửa"><i class="bi bi-pencil-square"></i></button>
-                                                <button type="button" class="btn btn-danger btn-sm btn-delete" title="Xóa"><i class="bi bi-trash3"></i></button>
-                                            </div>
-                                        </td>
-
+                                    <tr>
+                                        <th>Ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th class="text-center">Thao tác</th>
                                     </tr>
 
-                                </c:forEach>
-
-                            </c:if>
-
-                            <c:if test="${empty product}">
-
-                                <tr>
-
-                                    <td colspan="7" class="text-center text-muted py-4">Chưa có sản phẩm</td>
-
-                                </tr>
-
-                            </c:if>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+                                </thead>
 
 
-    <!-- MODAL THÊM / SỬA SẢN PHẨM -->
-    <div class="modal fade"
-         id="productModal"
-         tabindex="-1"
-         aria-labelledby="productModalLabel"
-         aria-hidden="true">
 
-        <div class="modal-dialog modal-dialog-centered">
+                                <tbody id="productTableBody">
 
-            <div class="modal-content">
+                                    <c:if test="${not empty product}">
 
-                <form id="productForm">
+                                        <c:forEach var="o" items="${product}">
 
-                    <!-- HEADER -->
-                    <div class="modal-header">
+                                            <tr data-id="${o.id}" data-name="${o.name}" data-price="${o.price}"
+                                                data-image="${pageContext.request.contextPath}/image/${o.image}"
+                                                data-description="${o.description}">
 
-                        <h5 class="modal-title"
-                            id="productModalLabel">
+                                                <td>
 
-                            Thêm sản phẩm
+                                                    <img class="img-fluid rounded"
+                                                        src="${pageContext.request.contextPath}/image/${o.image}"
+                                                        alt="${o.name}"
+                                                        style="max-width:80px;height:80px;object-fit:cover;">
 
-                        </h5>
+                                                </td>
 
-                        <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close">
-                        </button>
+                                                <td>${o.name}</td>
+                                                <td class="fw-bold text-danger">${o.price}đ</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <form action="edit" method="get">
+                                                            <input type="hidden" name="id" value="${o.id}">
+                                                            <button type="submit">Edit</button>
+                                                        </form>
+                                                        <form action="delete" method="post">
+                                                            <input type="hidden" name="id" value="${o.id}">
+                                                            <button type="submit">Xóa</button>
+                                                        </form>
 
-                    </div>
+                                                    </div>
+                                                </td>
 
+                                            </tr>
 
-                    <!-- BODY -->
-                    <div class="modal-body">
+                                        </c:forEach>
 
-                        <input type="hidden"
-                               id="productId"
-                               name="id">
+                                    </c:if>
 
+                                    <c:if test="${empty product}">
 
-                        <div class="row g-3">
+                                        <tr>
 
-                            <!-- TÊN -->
-                            <div class="col-md-6">
+                                            <td colspan="7" class="text-center text-muted py-4">Chưa có sản phẩm</td>
 
-                                <label for="productName"
-                                       class="form-label">
+                                        </tr>
 
-                                    Tên sản phẩm
+                                    </c:if>
 
-                                </label>
+                                </tbody>
 
-                                <input type="text"
-                                       class="form-control"
-                                       id="productName"
-                                       name="name"
-                                       required>
-
-                            </div>
-
-
-                            <!-- DANH MỤC -->
-                            <div class="col-md-6">
-
-                                <label for="productCategory"
-                                       class="form-label">
-
-                                    Danh mục
-
-                                </label>
-
-                                <input type="text"
-                                       class="form-control"
-                                       id="productCategory"
-                                       name="category"
-                                       required>
-
-                            </div>
-
-
-                            <!-- GIÁ -->
-                            <div class="col-md-4">
-
-                                <label for="productPrice"
-                                       class="form-label">
-
-                                    Giá
-
-                                </label>
-
-                                <input type="number"
-                                       class="form-control"
-                                       id="productPrice"
-                                       name="price"
-                                       min="0"
-                                       required>
-
-                            </div>
-
-                            <!-- ẢNH -->
-                            <div class="col-md-4">
-
-                                <label for="productImage"
-                                       class="form-label">
-
-                                    Ảnh
-
-                                </label>
-
-                                <input type="text"
-                                       class="form-control"
-                                       id="productImage"
-                                       name="image"
-                                       placeholder="https://...">
-
-                            </div>
-
-
-                            <!-- MÔ TẢ -->
-                            <div class="col-12">
-
-                                <label for="productDescription"
-                                       class="form-label">
-
-                                    Mô tả
-
-                                </label>
-
-                                <textarea class="form-control"
-                                          id="productDescription"
-                                          name="description"
-                                          rows="3"
-                                          required></textarea>
-
-                            </div>
+                            </table>
 
                         </div>
 
                     </div>
 
-
-                    <!-- FOOTER -->
-                    <div class="modal-footer">
-
-                        <button type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal">
-
-                            Đóng
-
-                        </button>
-
-                        <button type="submit"
-                                class="btn btn-primary"
-                                id="saveProductBtn">
-
-                            Lưu
-
-                        </button>
-
-                    </div>
-
-                </form>
+                </div>
 
             </div>
 
-        </div>
 
-    </div>
+            <!-- MODAL THÊM / SỬA SẢN PHẨM -->
+            <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel"
+                aria-hidden="true">
+
+                <div class="modal-dialog modal-dialog-centered">
+
+                    <div class="modal-content">
+
+                        <form id="productForm" action="add" method="post">
+
+                            <!-- HEADER -->
+                            <div class="modal-header">
+
+                                <h5 class="modal-title" id="productModalLabel">
+
+                                    Thêm sản phẩm
+
+                                </h5>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
+
+                            </div>
 
 
-    <!-- Footer -->
-    <jsp:include page="/views/common/footer.jsp" />
+                            <!-- BODY -->
+                            <div class="modal-body">
+
+                                <input type="hidden" id="productId" name="id">
 
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+                                <div class="row g-3">
 
-</body>
+                                    <!-- TÊN -->
+                                    <div class="col-md-6">
 
-</html>
+                                        <label for="productName" class="form-label">
+
+                                            Tên sản phẩm
+
+                                        </label>
+
+                                        <input type="text" class="form-control" id="productName" name="name" required>
+
+                                    </div>
+
+
+                                    <!-- DANH MỤC -->
+                                    <div class="col-md-6">
+
+                                        <label for="productCategory" class="form-label">
+
+                                            Danh mục
+
+                                        </label>
+
+                                        <select class="form-select" id="productCategory" name="category" required>
+
+                                            <option value="" disabled selected>Chọn danh mục</option>
+
+                                            <c:if test="${not empty categories}">
+                                                <c:forEach var="cat" items="${categories}">
+                                                    <option value="${cat.cateID}">${cat.cateName}</option>
+                                                </c:forEach>
+                                            </c:if>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <!-- GIÁ -->
+                                    <div class="col-md-4">
+
+                                        <label for="productPrice" class="form-label">
+
+                                            Giá
+
+                                        </label>
+
+                                        <input type="number" class="form-control" id="productPrice" name="price" min="0"
+                                            required>
+
+                                    </div>
+
+                                    <!-- ẢNH -->
+                                    <div class="col-md-4">
+
+                                        <label for="productImage" class="form-label">
+
+                                            Ảnh
+
+                                        </label>
+
+                                        <input type="text" class="form-control" id="productImage" name="image"
+                                            placeholder="https://...">
+
+                                    </div>
+
+
+                                    <!-- MÔ TẢ -->
+                                    <div class="col-12">
+
+                                        <label for="productDescription" class="form-label">
+
+                                            Mô tả
+
+                                        </label>
+
+                                        <textarea class="form-control" id="productDescription" name="description"
+                                            rows="3" required></textarea>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- FOOTER -->
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+
+                                    Đóng
+
+                                </button>
+
+                                <button type="submit" class="btn btn-primary" id="saveProductBtn">
+
+                                    Lưu
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Footer -->
+            <jsp:include page="/views/common/footer.jsp" />
+
+
+            <!-- Bootstrap JS -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+            </script>
+
+        </body>
+
+        </html>
