@@ -51,7 +51,7 @@
                                 </a>
                             </li>
                         </c:if>
-                    
+
                         <li class="nav-item">
                             <p class="nav-link">
                                 Hello ${sessionScope.user != null ? sessionScope.user.username : "Guest"}
@@ -61,9 +61,12 @@
 
                     <!-- Cart -->
                     <form class="d-flex p-3">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi bi-cart-fill me-1"></i>
-                            Cart
+                        <button class="btn btn-outline-dark " type="submit">
+                            <a href="/first-production/cart" class="text-decoration-none"><i
+                                    class="bi bi-cart-fill me-1"></i>
+                                Cart
+                            </a>
+
 
                             <span class="badge bg-dark text-white ms-1 rounded-pill">
                                 0

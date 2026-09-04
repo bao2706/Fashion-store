@@ -16,7 +16,11 @@ public class addProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession();
         Account user = (Account) session.getAttribute("user");
-        String id =String.valueOf(user.getId());
+        if (user == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        String id = String.valueOf(user.getId());
         String productname =request.getParameter("name");
         String price = request.getParameter("price");
         String description  =request.getParameter("description");

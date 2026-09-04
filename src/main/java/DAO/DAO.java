@@ -1,6 +1,7 @@
 package DAO;
 
 import entity.Account;
+import entity.Cart;
 import entity.Category;
 import entity.Product;
 import utils.DBConnection;
@@ -113,6 +114,39 @@ public class DAO {
 
         return list;
     }
+    public List<Cart> getProductInCart(int id){
+        List<Cart> list = new ArrayList<>();
+        String query = "SELECT \n" +
+                "    c.cartID,\n" +
+                "    c.productID,\n" +
+                "    c.quantity,\n" +
+                "    p.name,\n" +
+                "    p.price,\n" +
+                "    p.image\n" +
+                "FROM cart c\n" +
+                "JOIN products p ON c.productID = p.id\n" +
+                "WHERE c.userID = ?;";
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Cart(
+                        rs.getInt("cartID"),
+                        rs.getString("productID"),
+                        rs.getString("quantity"),
+                        rs.getString("name"),
+                        rs.getString("price"),
+                        rs.getString("image")
+                ));
+            }
+        } catch (Exception e) {
+        }
+
+
+        return list;
+    }
 
     public Product getProductsByID(String id) {
         String query = "select * from products where id=? \n";
@@ -191,6 +225,20 @@ public class DAO {
 
 
     }
+    public void  add_to_cart(String userId, String productID,String quantity) {
+        String query ="insert into shortshop.cart(userID,productID,quantity) values (?,?,?);";
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, userId);
+            ps.setString(2, productID);
+            ps.setString(3, quantity);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+
+
+    }
     public void  addProduct(String name, String  description, String price, String image, String cateId, String sellId) {
         String query ="INSERT INTO products (name, image, description, price,CatoID,SellID) VALUES (?,?,?, ?, ?, ?)";
 
@@ -219,6 +267,21 @@ public class DAO {
             con = new DBConnection().getConnection();// DB connect
             ps = con.prepareStatement(query);
             ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public void  quantityChange(String quantity , int id) {
+        String query ="UPDATE cart SET quantity = ? WHERE cartID = ?";
+
+        try {
+            con = new DBConnection().getConnection();// DB connect
+            ps = con.prepareStatement(query);
+            ps.setString(1, quantity);
+            ps.setInt(2, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,13 +340,14 @@ public class DAO {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-//        List<Product> list = dao.getProductBySellId(1);
+        dao.quantityChange("36",2);
+//        List<Cart> list = dao.getProductInCart(1);
 //        if (list == null) {
-//            System.out.println("ko co user");
+//            System.out.println("ko co sp");
 //        } else {
 //            System.out.println(list.toString()+"/n");
 //        }
-//        for (Product o : list) {
+//        for (Cart o : list) {
 //            System.out.println(o);
 //        }
     }

@@ -2,8 +2,7 @@ package controller;
 
 import DAO.DAO;
 import entity.Account;
-import entity.Category;
-import entity.Product;
+import entity.Cart;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,27 +13,21 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-
-@WebServlet("/manager")
-public class ProductManagerController extends HttpServlet {
+@WebServlet("/cart")
+public class cartController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=UTF-8");
         HttpSession session = req.getSession();
-        Account user = (Account) session.getAttribute("user");
+        Account user =(Account) session.getAttribute("user");
         if (user == null) {
             resp.sendRedirect("login");
             return;
         }
-        int id = user.getId();
+        int id = Integer.valueOf(user.getId());
         DAO dao = new DAO();
-        List<Product> listProduct = dao.getProductBySellId(id);
+        List<Cart> listCart = dao.getProductInCart(id);
 
-
-        List<Category> listCategory = dao.getAllCategori();
-
-        req.setAttribute("product", listProduct);
-        req.setAttribute("categories", listCategory);
-        req.getRequestDispatcher("views/asset/productManager.jsp").forward(req, resp);
+        req.setAttribute("cart",listCart);
+        req.getRequestDispatcher("/views/asset/cart.jsp").forward(req,resp);
     }
 }

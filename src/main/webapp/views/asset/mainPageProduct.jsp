@@ -58,7 +58,7 @@
                     <!-- Add to Cart Form -->
                     <form action="add-to-cart" method="POST">
                         <div class="d-flex">
-                            <input type="hidden" name="productId" value="${product  .id}">
+                            <input type="hidden" name="productId" value="${product.id}">
                             <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" min="1" style="max-width: 4rem" />
                             <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                                 <i class="bi-cart-fill me-1"></i>

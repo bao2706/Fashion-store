@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="productManager.jsp" class="btn btn-secondary">Hủy</a>
+                            <a href="/first-production/manager" class="btn btn-secondary">Hủy</a>
                             <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                         </div>
                     </form>

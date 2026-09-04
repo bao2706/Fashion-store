@@ -45,7 +45,7 @@
 
                     <c:forEach items="${listCategory}" var="o">
                         <div class="col-6 col-md-3">
-                            <a href="category?cateID=${o.cateID}"
+                            <a href="/first-production/category?cateID=${o.cateID}"
                                 class="btn btn-outline-dark w-100 py-3 ${tag == o.cateID ? " active":""}">
                                 ${o.cateName}
                             </a>
@@ -100,7 +100,7 @@
 
                                         <div class="text-center">
 
-                                            <a class="btn btn-outline-dark mt-auto" href="detail?id=${o.id}">
+                                            <a class="btn btn-outline-dark mt-auto" href="/first-production/detail?id=${o.id}">
                                                 View options
                                             </a>
 

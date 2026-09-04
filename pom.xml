@@ -32,12 +32,6 @@
       <version>9.4.0</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.38</version>
-      <scope>provided</scope>
-    </dependency>
 
     <!-- ĐÃ ĐỔI SANG JAKARTA SERVLET API CHO TOMCAT 10 -->
     <dependency>
@@ -72,7 +66,12 @@
       <version>4.0.0</version>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.42</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>

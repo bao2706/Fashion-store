@@ -7,7 +7,6 @@ import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class Product {
     private int id;
@@ -17,4 +16,12 @@ public class Product {
     private String image;
     private String category;
 
+    public Product(int id, String name, String description, String price, String image, String category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image = image;
+        this.category = category;
+    }
 }

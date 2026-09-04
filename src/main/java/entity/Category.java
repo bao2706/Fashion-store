@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@NoArgsConstructor
 @ToString
-@AllArgsConstructor
 public class Category {
     private String cateName;
     private String cateID;
 
+    public Category(String cateName, String cateID) {
+        this.cateName = cateName;
+        this.cateID = cateID;
+    }
 }

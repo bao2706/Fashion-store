@@ -48,7 +48,7 @@
                         <td class="fw-bold text-danger">${item.price * item.quantity}đ</td>
                         <td>
                             <form action="cart/remove" method="post">
-                                <input type="hidden" name="id" value="${item.id}" />
+                                <input type="hidden" name="id" value="${item.productId}" />
                                 <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
                             </form>
                         </td>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <a href="productManager.jsp" class="btn btn-secondary">Tiếp tục mua sắm</a>
+            <a href="/first-production" class="btn btn-secondary">Tiếp tục mua sắm</a>
             <div>
                 <span class="me-3">Tổng:</span>
                 <span class="fs-5 fw-bold text-danger">${total}đ</span>
