@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.UserService;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,8 +26,8 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        DAO dao = new DAO();
-        Account user = dao.login(username,password);
+        UserService userService = new UserService();
+        Account user = userService.login(username,password);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);

@@ -1,6 +1,8 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.CategoryService;
+import Sevice.ProductService;
 import entity.Category;
 import entity.Product;
 import jakarta.servlet.ServletException;
@@ -18,9 +20,10 @@ public class CategoryController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String cateID = request.getParameter("cateID");
-        DAO dao = new DAO();
-        List<Product> listP = dao.getProductsByCateID(cateID);
-        List<Category> listC = dao.getAllCategori();
+        ProductService productService = new ProductService();
+        CategoryService categoryService = new CategoryService();
+        List<Product> listP = productService.getProductsByCateID(cateID);
+        List<Category> listC = categoryService.getAllCategories();
 
 
         request.setAttribute("listProduct", listP);

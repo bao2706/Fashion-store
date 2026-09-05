@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.ProductService;
 import entity.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,9 +30,9 @@ public class SearchController  extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String txtSearch = request.getParameter("txt");
 
-        DAO dao = new DAO();
+        ProductService productService = new ProductService();
 
-        List<Product> SearchP = dao.SearchProductByTxtSearch(txtSearch);
+        List<Product> SearchP = productService.SearchProductByTxtSearch(txtSearch);
 
 
         request.setAttribute("listProduct", SearchP);

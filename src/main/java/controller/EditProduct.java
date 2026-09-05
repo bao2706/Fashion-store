@@ -1,6 +1,7 @@
 package controller;
 
-import DAO.DAO;
+import Sevice.CategoryService;
+import Sevice.ProductService;
 import entity.Category;
 import entity.Product;
 import jakarta.servlet.ServletException;
@@ -18,9 +19,10 @@ public class EditProduct extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user_id = req.getParameter("id");
 
-        DAO dao = new DAO();
-        Product product = dao.getProductsByID(user_id);
-        List<Category> category = dao.getAllCategori();
+        ProductService productService = new ProductService();
+        CategoryService categoryService = new CategoryService();
+        Product product = productService.getProductsByID(user_id);
+        List<Category> category = categoryService.getAllCategories();
 
         req.setAttribute("product", product);
         req.setAttribute("categories", category);

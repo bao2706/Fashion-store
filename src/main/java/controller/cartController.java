@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.CartService;
 import entity.Account;
 import entity.Cart;
 import jakarta.servlet.ServletException;
@@ -24,8 +25,8 @@ public class cartController extends HttpServlet{
             return;
         }
         int id = Integer.valueOf(user.getId());
-        DAO dao = new DAO();
-        List<Cart> listCart = dao.getProductInCart(id);
+        CartService cartService = new CartService();
+        List<Cart> listCart = cartService.getProductInCart(id);
 
         req.setAttribute("cart",listCart);
         req.getRequestDispatcher("/views/asset/cart.jsp").forward(req,resp);

@@ -239,7 +239,7 @@ public class DAO {
 
 
     }
-    public void  addProduct(String name, String  description, String price, String image, String cateId, String sellId) {
+    public void  addProduct(String name, String  description, String price, String image, String cateId, Integer sellId) {
         String query ="INSERT INTO products (name, image, description, price,CatoID,SellID) VALUES (?,?,?, ?, ?, ?)";
 
         try {
@@ -250,7 +250,7 @@ public class DAO {
             ps.setString(3, description);
             ps.setString(4, price);
             ps.setString(5, cateId);
-            ps.setString(6, sellId);
+            ps.setInt(6, sellId);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

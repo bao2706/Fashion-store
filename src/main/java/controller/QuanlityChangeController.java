@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.CartService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ public class QuanlityChangeController extends HttpServlet {
 
 
 
-        DAO dao = new DAO();
-        dao.quantityChange(quantity,id);
+        CartService cartService = new CartService();
+        cartService.quantityChange(quantity,id);
 
 
 

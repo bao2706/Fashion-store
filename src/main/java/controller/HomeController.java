@@ -1,6 +1,8 @@
 package controller;
 
-import DAO.DAO;
+import Sevice.CartService;
+import Sevice.CategoryService;
+import Sevice.ProductService;
 import entity.Category;
 import entity.Product;
 import jakarta.servlet.ServletException;
@@ -16,35 +18,17 @@ import java.util.List;
 public class HomeController extends HttpServlet {
 
     // Đã đổi tên hàm thành doGet để bắt chính xác request từ URL trình duyệ
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        // get data
-        DAO dao = new DAO();
-        List<Product> listP = dao.getAllProducts();
-        List<Category> listC = dao.getAllCategori();
-
-        //set data to jsp
-        request.setAttribute("listProduct", listP);
-        request.setAttribute("listCategory", listC);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAO dao = new DAO();
-        List<Product> listP = dao.getAllProducts();
-        List<Category> listC = dao.getAllCategori();
+        ProductService productService = new ProductService();
+        CategoryService categoryService = new CategoryService();
+        List<Product> listP = productService.getAllProducts();
+        List<Category> listC = categoryService.getAllCategories();
 
         //set data to jsp
         request.setAttribute("listProduct", listP);
         request.setAttribute("listCategory", listC);
         request.getRequestDispatcher("/index.jsp").forward(request, response);    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
 }

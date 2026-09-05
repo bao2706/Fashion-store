@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.CartService;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,8 +25,8 @@ public class AddToCartController extends HttpServlet {
         String id =String.valueOf(user.getId()) ;
         String quality = req.getParameter("quantity");
         String productId = req.getParameter("productId");
-        DAO dao = new DAO();
-        dao.add_to_cart(id,productId,quality);
+        CartService cartService = new CartService();
+        cartService.add_to_cart(id,productId,quality);
 
         resp.sendRedirect("cart");
 

@@ -1,6 +1,6 @@
 package controller;
 
-import DAO.DAO;
+import Sevice.ProductService;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,15 +20,15 @@ public class addProductController extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
-        String id = String.valueOf(user.getId());
+        int id = user.getId();
         String productname =request.getParameter("name");
         String price = request.getParameter("price");
         String description  =request.getParameter("description");
         String productImage =request.getParameter("image");
         String CatoID =request.getParameter("category");
 
-        DAO dao = new DAO();
-        dao.addProduct(productname,
+        ProductService productSevicep = new ProductService();
+        productSevicep.addProduct(productname,
                 description,
                 price,
                 productImage,

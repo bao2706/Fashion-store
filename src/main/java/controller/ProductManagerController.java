@@ -1,6 +1,8 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.CategoryService;
+import Sevice.ProductService;
 import entity.Account;
 import entity.Category;
 import entity.Product;
@@ -27,11 +29,12 @@ public class ProductManagerController extends HttpServlet {
             return;
         }
         int id = user.getId();
-        DAO dao = new DAO();
-        List<Product> listProduct = dao.getProductBySellId(id);
+        ProductService productService = new ProductService();
+        CategoryService categoryService = new CategoryService();
+        List<Product> listProduct = productService.getProductsBySellId(id);
 
 
-        List<Category> listCategory = dao.getAllCategori();
+        List<Category> listCategory = categoryService.getAllCategories();
 
         req.setAttribute("product", listProduct);
         req.setAttribute("categories", listCategory);

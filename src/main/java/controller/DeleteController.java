@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,8 +15,8 @@ public class DeleteController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String id = request.getParameter("id");
 
-        DAO  dao = new DAO();
-        dao.deleteProduct(id);
+        ProductService productService = new ProductService();
+        productService.deleteProduct(id);
 
         response.sendRedirect("manager");
     }

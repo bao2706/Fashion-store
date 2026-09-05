@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.ProductService;
 import entity.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -32,8 +33,8 @@ public class viewProductController extends HttpServlet {
         String id = request.getParameter("id");
 
 
-        DAO dao = new DAO();
-        Product product = new DAO().getProductsByID(id);
+        ProductService productService = new ProductService();
+        Product product = productService.getProductsByID(id);
         request.setAttribute("product", product);
 
         request.getRequestDispatcher("/views/asset/mainPageProduct.jsp").forward(request, response);

@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.DAO;
+import Sevice.UserService;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -44,12 +45,12 @@ public class SignUpController extends HttpServlet {
         }
 
         // 3. Tương tác với Database
-        DAO dao = new DAO();
-        Account account = dao.checkAccount(user);
+        UserService userService = new UserService();
+        Account account = userService.checkAccount(user);
 
         if (account == null) {
             // Tài khoản chưa tồn tại -> Cho phép tạo mới
-            dao.signUp(user, password);
+            userService.signUp(user, password);
             resp.sendRedirect("home");
             // Chuyển hướng về trang chủ khi thành công
         } else {
