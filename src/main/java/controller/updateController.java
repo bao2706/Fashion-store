@@ -21,6 +21,7 @@ public class updateController extends HttpServlet {
         String category = request.getParameter("category");
         ProductService productService = new ProductService();
         productService.update(name, image, description, price, category, id);
-        response.sendRedirect("manager");
-    }
+        response.sendRedirect(
+                request.getContextPath() + "/manager"
+        );    }
 }

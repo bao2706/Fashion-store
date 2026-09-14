@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter("/manager/*")
-public class AdminFilter implements Filter {
+public class SellerFilter implements Filter {
 
     @Override
     public void doFilter(
@@ -48,7 +48,7 @@ public class AdminFilter implements Filter {
         }
 
         // 3. Login rồi nhưng không phải admin
-        if (user.getIsAdmin() != 1) {
+        if (user.getIssell()  != 1) {
 
             request.setAttribute(
                     "error",

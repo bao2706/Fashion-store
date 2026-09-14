@@ -18,6 +18,7 @@ public class DeleteController extends HttpServlet {
         ProductService productService = new ProductService();
         productService.deleteProduct(id);
 
-        response.sendRedirect("manager");
-    }
+        response.sendRedirect(
+                request.getContextPath() + "/manager"
+        );    }
 }
