@@ -23,14 +23,15 @@ public class CartDAO {
         } catch (Exception e) {
         }
     }
-    public void  remove(String id) {
+    public void  remove(int id,String userId) {
         String query ="DELETE FROM cart \n" +
-                "WHERE cartId = ?; \n";
+                "WHERE cartId = ? and  userID = ?; \n";
 
         try {
             con = new DBConnection().getConnection();// DB connect
             ps = con.prepareStatement(query);
-            ps.setString(1, id);
+            ps.setInt(1, id);
+            ps.setString(2, userId);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

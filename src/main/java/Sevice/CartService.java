@@ -18,7 +18,7 @@ public class CartService {
     public void quantityChange(String quantity , int id) {
         dao.quantityChange(quantity,id);
     }
-    public void remove(int id) {
-        cartDAO.remove(String.valueOf(id));
+    public void remove(int id, String userId) {
+        cartDAO.remove(id,userId);
     }
 }
