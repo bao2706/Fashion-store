@@ -39,7 +39,7 @@
                         <td>${item.name}</td>
                         <td class="fw-bold">${item.price}đ</td>
                         <td>
-                            <form action="cart/update" method="post" class="d-flex align-items-center">
+                            <form action="${pageContext.request.contextPath}/cart/update" method="post" class="d-flex align-items-center">
                                 <input type="hidden" name="id" value="${item.id}" />
                                 <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control form-control-sm" style="width:80px;" />
                                 <button type="submit" class="btn btn-sm btn-outline-primary ms-2">Cập nhật</button>
@@ -47,8 +47,8 @@
                         </td>
                         <td class="fw-bold text-danger">${item.price * item.quantity}đ</td>
                         <td>
-                            <form action="cart/remove" method="post">
-                                <input type="hidden" name="id" value="${item.productId}" />
+                            <form action="${pageContext.request.contextPath}/cart/remove" method="post">
+                                <input type="hidden" name="id" value="${item.id}" />
                                 <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
                             </form>
                         </td>
@@ -60,18 +60,18 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <a href="/first-production" class="btn btn-secondary">Tiếp tục mua sắm</a>
+            <a href="${pageContext.request.contextPath}/" class="btn btn-secondary">Tiếp tục mua sắm</a>
             <div>
                 <span class="me-3">Tổng:</span>
                 <span class="fs-5 fw-bold text-danger">${total}đ</span>
-                <a href="checkout" class="btn btn-success ms-3">Thanh toán</a>
+                <a href="${pageContext.request.contextPath}/checkout" class="btn btn-success ms-3">Thanh toán</a>
             </div>
         </div>
 
     </c:if>
 
     <c:if test="${empty cart}">
-        <div class="alert alert-info">Giỏ hàng trống. <a href="/first-production/home">Tiếp tục mua sắm</a></div>
+        <div class="alert alert-info">Giỏ hàng trống. <a href="${pageContext.request.contextPath}/home">Tiếp tục mua sắm</a></div>
     </c:if>
 
 </div>

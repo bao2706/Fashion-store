@@ -13,7 +13,7 @@
     <title>${product.name} - Shop Quần Áo</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="1/assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/1/assets/favicon.ico">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Custom CSS -->
-    <link href="1/css/styles.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/1/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -56,7 +56,7 @@
                     <p class="lead">${product.description}</p>
                     
                     <!-- Add to Cart Form -->
-                    <form action="add-to-cart" method="POST">
+                    <form action="${pageContext.request.contextPath}/cart/add-to-cart" method="POST">
                         <div class="d-flex">
                             <input type="hidden" name="productId" value="${product.id}">
                             <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" min="1" style="max-width: 4rem" />
@@ -92,7 +92,7 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="detail?id=${product.id}">Xem chi tiết</a>
+                                    <a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/detail?id=${product.id}">Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JS -->
-    <script src="1/js/scripts.js"></script>
+    <script src="${pageContext.request.contextPath}/1/js/scripts.js"></script>
 
 </body>
 </html>

@@ -29,7 +29,7 @@
               </c:if>
             </div>
 
-            <form action="signup" method="post">
+            <form action="${pageContext.request.contextPath}/signup" method="post">
               <div class="mb-3">
                 <label for="user" class="form-label">Full name</label>
                 <input name="user" type="text" id="fullName" class="form-control" required />
@@ -50,7 +50,7 @@
             </form>
 
             <hr class="my-4">
-            <p class="text-center mb-0">Already have an account? <a href="login">Login</a></p>
+            <p class="text-center mb-0">Already have an account? <a href="${pageContext.request.contextPath}/login">Login</a></p>
 
           </div>
         </div>

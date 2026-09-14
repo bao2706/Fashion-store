@@ -14,7 +14,7 @@
             <title>Shop Homepage</title>
 
             <!-- Favicon -->
-            <link rel="icon" type="image/x-icon" href="1/assets/favicon.ico">
+            <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/1/assets/favicon.ico">
 
             <!-- Bootstrap CSS -->
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
                 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
             <!-- Custom CSS -->
-            <link href="1/css/styles.css" rel="stylesheet">
+            <link href="${pageContext.request.contextPath}/1/css/styles.css" rel="stylesheet">
         </head>
 
         <body>
@@ -45,7 +45,7 @@
 
                     <c:forEach items="${listCategory}" var="o">
                         <div class="col-6 col-md-3">
-                            <a href="/first-production/category?cateID=${o.cateID}"
+                            <a href="${pageContext.request.contextPath}/category?cateID=${o.cateID}"
                                 class="btn btn-outline-dark w-100 py-3 ${tag == o.cateID ? " active":""}">
                                 ${o.cateName}
                             </a>
@@ -100,7 +100,7 @@
 
                                         <div class="text-center">
 
-                                            <a class="btn btn-outline-dark mt-auto" href="/first-production/detail?id=${o.id}">
+                                            <a class="btn btn-outline-dark mt-auto" href="${pageContext.request.contextPath}/detail?id=${o.id}">
                                                 View options
                                             </a>
 

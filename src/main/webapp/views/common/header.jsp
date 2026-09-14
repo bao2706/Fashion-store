@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
 
-                <a class="navbar-brand" href="/first-production">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                     Shop Quần Áo
                 </a>
 
@@ -18,20 +18,20 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="/first-production">
+                            <a class="nav-link active" href="${pageContext.request.contextPath}/">
                                 Home
                             </a>
                         </li>
                         <c:if test="${sessionScope.user == null}">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/first-production/login">
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/login">
                                     Login
                                 </a>
                             </li>
                         </c:if>
                         <c:if test="${sessionScope.user != null}">
                             <li class="nav-item">
-                                <a class="nav-link active" href="/first-production/logout">
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/logout">
                                     Log out
                                 </a>
                             </li>
@@ -39,7 +39,7 @@
                         </li>
                         <c:if test="${sessionScope.user != null && sessionScope.user.issell == 1 }">
                             <li class="nav-item">
-                                <a class="nav-link" href="/first-production/manager">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/manager">
                                     Manager Product
                                 </a>
                             </li>
@@ -61,8 +61,8 @@
 
                     <!-- Cart -->
                     <form class="d-flex p-3">
-                        <button class="btn btn-outline-dark " type="submit">
-                            <a href="/first-production/cart" class="text-decoration-none"><i
+                        <button class="btn btn-outline-dark " type="button">
+                            <a href="${pageContext.request.contextPath}/cart" class="text-decoration-none"><i
                                     class="bi bi-cart-fill me-1"></i>
                                 Cart
                             </a>
@@ -73,7 +73,7 @@
                             </span>
                         </button>
                     </form>
-                    <form class="d-flex g-5" action="search" method="post">
+                    <form class="d-flex g-5" action="${pageContext.request.contextPath}/search" method="post">
                         <input class="form-control me-2" type="text" placeholder="Search" name="txt"
                             value="${txtSearch}">
                         <button class="btn btn-outline-dark" type="submit">

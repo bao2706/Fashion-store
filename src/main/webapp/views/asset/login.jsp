@@ -25,7 +25,7 @@
                   <div class="text-danger mb-3">
                     ${error}
                   </div>
-                  <form action="login" method="post">
+                  <form action="${pageContext.request.contextPath}/login" method="post">
                     <div data-mdb-input-init class="form-outline mb-4">
                       <input name="username" type="username" id="typeEmailX-2" class="form-control form-control-lg" />
                       <label class="form-label" for="typeEmailX-2">Email</label>

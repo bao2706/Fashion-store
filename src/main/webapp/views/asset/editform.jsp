@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">Sửa sản phẩm</h4>
 
-                    <form action="update" method="post">
+                    <form action="${pageContext.request.contextPath}/manager/update" method="post">
                         <input type="hidden" name="id" value="${product.id}" />
 
                         <div class="mb-3">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="/first-production/manager" class="btn btn-secondary">Hủy</a>
+                            <a href="${pageContext.request.contextPath}/manager" class="btn btn-secondary">Hủy</a>
                             <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                         </div>
                     </form>

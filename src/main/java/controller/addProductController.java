@@ -16,10 +16,6 @@ public class addProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession();
         Account user = (Account) session.getAttribute("user");
-        if (user == null) {
-            response.sendRedirect("login");
-            return;
-        }
         int id = user.getId();
         String productname =request.getParameter("name");
         String price = request.getParameter("price");
@@ -34,6 +30,7 @@ public class addProductController extends HttpServlet {
                 productImage,
                 CatoID,
                 id);
-        response.sendRedirect("manager");
-    }
+        response.sendRedirect(
+                request.getContextPath() + "/manager"
+        );    }
 }

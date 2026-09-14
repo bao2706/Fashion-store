@@ -225,20 +225,7 @@ public class DAO {
 
 
     }
-    public void  add_to_cart(String userId, String productID,String quantity) {
-        String query ="insert into shortshop.cart(userID,productID,quantity) values (?,?,?);";
-        try {
-            con = new DBConnection().getConnection();// DB connect
-            ps = con.prepareStatement(query);
-            ps.setString(1, userId);
-            ps.setString(2, productID);
-            ps.setString(3, quantity);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
 
-
-    }
     public void  addProduct(String name, String  description, String price, String image, String cateId, Integer sellId) {
         String query ="INSERT INTO products (name, image, description, price,CatoID,SellID) VALUES (?,?,?, ?, ?, ?)";
 

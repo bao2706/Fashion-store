@@ -104,11 +104,11 @@
                                                 <td class="fw-bold text-danger">${o.price}đ</td>
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center gap-2">
-                                                        <form action="edit" method="get">
+                                                        <form action="${pageContext.request.contextPath}/manager/edit" method="get">
                                                             <input type="hidden" name="id" value="${o.id}">
                                                             <button type="submit">Edit</button>
                                                         </form>
-                                                        <form action="delete" method="post">
+                                                        <form action="${pageContext.request.contextPath}/manager/delete" method="post">
                                                             <input type="hidden" name="id" value="${o.id}">
                                                             <button type="submit">Xóa</button>
                                                         </form>
@@ -153,7 +153,7 @@
 
                     <div class="modal-content">
 
-                        <form id="productForm" action="add" method="post">
+                        <form id="productForm" action="${pageContext.request.contextPath}/manager/add" method="post">
 
                             <!-- HEADER -->
                             <div class="modal-header">

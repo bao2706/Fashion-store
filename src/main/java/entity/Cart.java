@@ -13,8 +13,8 @@ public class Cart {
     private int id;
     private String productId;
     private String quantity;
- private String name;
- private String price;
- private String image;
+    private String name;
+    private String price;
+    private String image;
 
 }

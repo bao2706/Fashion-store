@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/add-to-cart")
+@WebServlet("/cart/add-to-cart")
 public class AddToCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class AddToCartController extends HttpServlet {
         CartService cartService = new CartService();
         cartService.add_to_cart(id,productId,quality);
 
-        resp.sendRedirect("cart");
+        resp.sendRedirect(req.getContextPath()+"/cart");
 
     }
 }

@@ -1,6 +1,5 @@
 package controller;
 
-import DAO.DAO;
 import Sevice.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
