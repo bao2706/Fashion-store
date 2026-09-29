@@ -269,7 +269,19 @@ public class DAO {
             statement.setInt(1, quantity);
             statement.setInt(2, cartId);
             statement.setInt(3, userId);
-            return statement.executeUpdate() == 1;
+            if (statement.executeUpdate() == 1) {
+                return true;
+            }
+
+            // Some JDBC configurations report 0 when the new quantity equals the old one.
+            String check = "SELECT 1 FROM cart WHERE cartID = ? AND userID = ?";
+            try (PreparedStatement lookup = connection.prepareStatement(check)) {
+                lookup.setInt(1, cartId);
+                lookup.setInt(2, userId);
+                try (ResultSet match = lookup.executeQuery()) {
+                    return match.next();
+                }
+            }
         } catch (SQLException e) {
             throw new IllegalStateException("Could not update cart quantity", e);
         }
