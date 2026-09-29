@@ -41,7 +41,7 @@
                         <td>
                             <form action="${pageContext.request.contextPath}/cart/update" method="post" class="d-flex align-items-center">
                                 <input type="hidden" name="id" value="${item.id}" />
-                                <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control form-control-sm" style="width:80px;" />
+                                <input type="number" name="quantity" value="${item.quantity}" min="1" max="99" required class="form-control form-control-sm" style="width:80px;" />
                                 <button type="submit" class="btn btn-sm btn-outline-primary ms-2">Cập nhật</button>
                             </form>
                         </td>
