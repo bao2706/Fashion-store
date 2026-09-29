@@ -9,6 +9,7 @@ import utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -261,20 +262,17 @@ public class DAO {
 
 
     }
-    public void  quantityChange(String quantity , int id) {
-        String query ="UPDATE cart SET quantity = ? WHERE cartID = ?";
-
-        try {
-            con = new DBConnection().getConnection();// DB connect
-            ps = con.prepareStatement(query);
-            ps.setString(1, quantity);
-            ps.setInt(2, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public boolean quantityChange(int quantity, int cartId, int userId) {
+        String query = "UPDATE cart SET quantity = ? WHERE cartID = ? AND userID = ?";
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, quantity);
+            statement.setInt(2, cartId);
+            statement.setInt(3, userId);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            throw new IllegalStateException("Could not update cart quantity", e);
         }
-
-
     }
     public void  update(String name,String image,String description,String price,String CatoID,String id) {
         String query ="UPDATE products\n" +
@@ -325,20 +323,4 @@ public class DAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        dao.quantityChange("36",2);
-//        List<Cart> list = dao.getProductInCart(1);
-//        if (list == null) {
-//            System.out.println("ko co sp");
-//        } else {
-//            System.out.println(list.toString()+"/n");
-//        }
-//        for (Cart o : list) {
-//            System.out.println(o);
-//        }
-    }
 }
-//}
-
-
