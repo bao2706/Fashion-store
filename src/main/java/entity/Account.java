@@ -14,6 +14,15 @@ public class Account {
     int id;
     int issell;
     int isAdmin;
+
+    public int getIssell() {
+        return issell;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public Account(String username, String password, int id, int issell, int isAdmin) {
         this.username = username;
         this.password = password;

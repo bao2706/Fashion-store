@@ -42,6 +42,7 @@
                             <form action="${pageContext.request.contextPath}/cart/update" method="post" class="d-flex align-items-center">
                                 <input type="hidden" name="id" value="${item.id}" />
                                 <input type="number" name="quantity" value="${item.quantity}" min="1" class="form-control form-control-sm" style="width:80px;" />
+                                <p class="text-error">${error}</p>
                                 <button type="submit" class="btn btn-sm btn-outline-primary ms-2">Cập nhật</button>
                             </form>
                         </td>

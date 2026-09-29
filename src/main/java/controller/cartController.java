@@ -20,10 +20,6 @@ public class cartController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Account user =(Account) session.getAttribute("user");
-        if (user == null) {
-            resp.sendRedirect("login");
-            return;
-        }
         int id = Integer.valueOf(user.getId());
         CartService cartService = new CartService();
         List<Cart> listCart = cartService.getProductInCart(id);

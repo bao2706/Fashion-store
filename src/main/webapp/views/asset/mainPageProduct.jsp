@@ -64,8 +64,15 @@
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>
+
                         </div>
+
                     </form>
+                        <c:if test="${not empty error}">
+                                                    <div class=" text-danger mt-2">
+                                                        <c:out value="${error}" />
+                                                    </div>
+                                                </c:if>
                 </div>
             </div>
         </div>

@@ -13,7 +13,9 @@ import java.io.IOException;
 
 @WebServlet("/signup")
 public class SignUpController extends HttpServlet {
-
+    private boolean hasSpace(String username) {
+        return username.contains(" ");
+    }
     // Chỉ dùng doGet để hiển thị giao diện trang đăng ký
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,18 +32,29 @@ public class SignUpController extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
 
         // 1. Kiểm tra dữ liệu rỗng để tránh lỗi sập web
-        if (user == null || password == null || confirmPassword == null) {
-            req.setAttribute("message", "Vui lòng nhập đầy đủ thông tin.");
+        if (user == null
+                || password == null
+                || confirmPassword == null
+                || password.trim().isEmpty()
+                || confirmPassword.trim().isEmpty()
+                || user.trim().isEmpty()) {
+            req.setAttribute("error", "Vui lòng nhập đầy đủ thông tin.");
             req.getRequestDispatcher("/views/asset/signUp.jsp").forward(req, resp);
-            return; // Dừng chạy code bên dưới
+            return;
         }
 
         // 2. Kiểm tra mật khẩu nhập lại
         if (!password.equals(confirmPassword)) {
             // Dùng forward để giữ lại thông báo lỗi trên giao diện
-            req.setAttribute("message", "Mật khẩu và Xác nhận mật khẩu không khớp.");
+            req.setAttribute("error", "Mật khẩu và Xác nhận mật khẩu không khớp.");
             req.getRequestDispatcher("/views/asset/signUp.jsp").forward(req, resp);
             return;
+        }
+        if(hasSpace(user) || hasSpace(password)) {
+            req.setAttribute("error", "ten ko dc co dau cach");
+            req.getRequestDispatcher("/views/asset/signUp.jsp").forward(req, resp);
+            return;
+
         }
 
         // 3. Tương tác với Database
@@ -55,7 +68,7 @@ public class SignUpController extends HttpServlet {
             // Chuyển hướng về trang chủ khi thành công
         } else {
             // Tài khoản đã tồn tại -> Báo lỗi
-            req.setAttribute("message", "Tên tài khoản đã tồn tại. Vui lòng chọn tên khác.");
+            req.setAttribute("error", "Tên tài khoản đã tồn tại. Vui lòng chọn tên khác.");
             req.getRequestDispatcher("/views/asset/signUp.jsp").forward(req, resp);
         }
     }
