@@ -15,8 +15,8 @@ public class CartService {
     public List<Cart> getProductInCart(int id){
         return dao.getProductInCart(id);
     }
-    public void quantityChange(String quantity , int id) {
-        dao.quantityChange(quantity,id);
+    public boolean quantityChange(int quantity, int cartId, int userId) {
+        return dao.quantityChange(quantity, cartId, userId);
     }
     public void remove(int id, String userId) {
         cartDAO.remove(id,userId);
