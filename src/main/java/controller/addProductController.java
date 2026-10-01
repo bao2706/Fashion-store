@@ -1,5 +1,6 @@
 package controller;
 
+import Sevice.CategoryService;
 import Sevice.ProductService;
 import entity.Account;
 import jakarta.servlet.ServletException;
@@ -13,24 +14,79 @@ import java.io.IOException;
 
 @WebServlet("/manager/add")
 public class addProductController extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    HttpSession session = request.getSession();
-        Account user = (Account) session.getAttribute("user");
-        int id = user.getId();
-        String productname =request.getParameter("name");
-        String price = request.getParameter("price");
-        String description  =request.getParameter("description");
-        String productImage =request.getParameter("image");
-        String CatoID =request.getParameter("category");
 
-        ProductService productSevicep = new ProductService();
-        productSevicep.addProduct(productname,
+    @Override
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession();
+        Account user = (Account) session.getAttribute("user");
+
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        String name = request.getParameter("name");
+        String priceInput = request.getParameter("price");
+        String description = request.getParameter("description");
+        String image = request.getParameter("image");
+        String categoryId = request.getParameter("category");
+
+        String error = null;
+        int price = 0;
+
+        if (name == null || name.trim().isEmpty()) {
+            error = "Vui lòng nhập tên sản phẩm";
+
+        } else if (priceInput == null || priceInput.trim().isEmpty()) {
+            error = "Vui lòng nhập giá";
+
+        } else {
+            try {
+                price = Integer.parseInt(priceInput.trim());
+
+                if (price <= 0) {
+                    error = "Giá phải lớn hơn 0";
+                }
+            } catch (NumberFormatException e) {
+                error = "Giá phải là số nguyên trong phạm vi cho phép";
+            }
+        }
+
+        ProductService productService = new ProductService();
+
+        if ( error != null) {
+            CategoryService categoryService = new CategoryService();
+
+            request.setAttribute("error", error);
+            request.setAttribute(
+                    "product",
+                    productService.getProductsBySellId(user.getId())
+            );
+            request.setAttribute(
+                    "categories",
+                    categoryService.getAllCategories()
+            );
+
+            request.getRequestDispatcher(
+                    "/views/asset/productManager.jsp"
+            ).forward(request, response);
+
+            return;
+        }
+        productService.addProduct(
+                name.trim(),
                 description,
-                price,
-                productImage,
-                CatoID,
-                id);
-        response.sendRedirect(
-                request.getContextPath() + "/manager"
-        );    }
+                String.valueOf(price),
+                image,
+                categoryId,
+                user.getId()
+        );
+
+        response.sendRedirect(request.getContextPath() + "/manager");
+    }
 }

@@ -172,6 +172,11 @@
 
                             <!-- BODY -->
                             <div class="modal-body">
+                            <c:if test="${not empty error}">
+                                <div class="alert alert-danger">
+                                    <c:out value="${error}" />
+                                </div>
+                            </c:if>
 
                                 <input type="hidden" id="productId" name="id">
 
@@ -297,7 +302,12 @@
             <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
             </script>
-
         </body>
-
+<c:if test="${not empty error}">
+    <script>
+        const modalElement = document.getElementById('productModal');
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    </script>
+</c:if>
         </html>
