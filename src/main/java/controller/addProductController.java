@@ -3,6 +3,7 @@ package controller;
 import Sevice.CategoryService;
 import Sevice.ProductService;
 import entity.Account;
+import entity.Category;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -56,7 +57,33 @@ public class addProductController extends HttpServlet {
                 error = "Giá phải là số nguyên trong phạm vi cho phép";
             }
         }
+        if (error == null &&
+                (description == null || description.trim().isEmpty())) {
 
+            error = "Vui lòng nhập mô tả";
+        }
+        if (error == null) {
+            if (categoryId == null || categoryId.trim().isEmpty()) {
+                error = "Vui lòng chọn danh mục";
+
+            } else {
+                categoryId = categoryId.trim();
+
+                CategoryService categoryService = new CategoryService();
+                boolean categoryExists = false;
+
+                for (Category cat : categoryService.getAllCategories()) {
+                    if (categoryId.equals(cat.getCateID())) {
+                        categoryExists = true;
+                        break;
+                    }
+                }
+
+                if (!categoryExists) {
+                    error = "Danh mục không hợp lệ";
+                }
+            }
+        }
         ProductService productService = new ProductService();
 
         if ( error != null) {
